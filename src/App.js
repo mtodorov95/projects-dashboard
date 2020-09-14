@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
+import CreateProject from "./components/CreateProject";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
 import ProjectDetails from "./components/ProjectDetails";
@@ -13,6 +14,7 @@ function App() {
       <div className="app">
         <Navbar />
         <Switch>
+          <Route path="/create" component={CreateProject} />
           <Route path="/signup" component={SignUp} />
           <Route path="/signin" component={SignIn} />
           <Route path="/project/:id" component={ProjectDetails} />
