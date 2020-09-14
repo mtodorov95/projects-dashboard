@@ -1,12 +1,12 @@
 import React from "react";
 import ProjectSummary from "./ProjectSummary";
 
-function ProjectList() {
+function ProjectList({ projects }) {
   return (
     <div className="projectList section">
-      <ProjectSummary />
-      <ProjectSummary />
-      <ProjectSummary />
+      {projects?.map((project) => (
+        <ProjectSummary key={project.id} project={project} />
+      ))}
     </div>
   );
 }
