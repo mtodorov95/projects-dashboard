@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { createProject } from "../actions/projectActions";
 
-function CreateProject() {
+function CreateProject(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const handleSubmit = (e) => {
     e.prevent.default();
+    props.createProject({ title, content });
   };
-
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className="white">
@@ -38,4 +40,10 @@ function CreateProject() {
   );
 }
 
-export default CreateProject;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createProject: (project) => dispatch(createProject(project)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CreateProject);
