@@ -7,7 +7,7 @@ function CreateProject(props) {
   const [content, setContent] = useState("");
 
   const handleSubmit = (e) => {
-    e.prevent.default();
+    e.preventDefault();
     props.createProject({ title, content });
   };
   return (

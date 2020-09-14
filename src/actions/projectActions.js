@@ -6,8 +6,8 @@ export const createProject = (project) => {
   // }
 
   // Halt the dispatch, make async calls and resume after
-  console.log(project);
-  return (dispatch, getState) => {
+  // getFirebase from thunk.withExtraArgument at index.js
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     dispatch({
       type: "CREATE_PROJECT",
       project,
