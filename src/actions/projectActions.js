@@ -8,9 +8,22 @@ export const createProject = (project) => {
   // Halt the dispatch, make async calls and resume after
   // getFirebase from thunk.withExtraArgument at index.js
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    dispatch({
-      type: "CREATE_PROJECT",
-      project,
-    });
+    const firestore = getFirestore();
+    firestore
+      .collection("projects")
+      .add({
+        ...project,
+        authorUsername: "username",
+        createdAt: new Date(),
+      })
+      .then(() => {
+        dispatch({
+          type: "CREATE_PROJECT",
+          project,
+        });
+      })
+      .catch((err) => {
+        dispatch({ type: "CREATE_PROJECT_ERROR", err });
+      });
   };
 };
