@@ -9,11 +9,12 @@ export const createProject = (project) => {
   // getFirebase from thunk.withExtraArgument at index.js
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
+    const profile = getState().firebase.profile;
     firestore
       .collection("projects")
       .add({
         ...project,
-        authorUsername: "username",
+        authorUsername: profile.username,
         createdAt: new Date(),
       })
       .then(() => {

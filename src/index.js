@@ -26,10 +26,19 @@ const store = createStore(
   )
 );
 
+//Sync firebase auth with correspoding user doc in firestore
+const profileProps = {
+  userProfile: "users",
+  useFirestoreForProfile: true,
+  enableRedirectHandling: false,
+  resetBeforeLogin: false,
+};
+
 // Redux binding for firebase
 const rrfProps = {
   firebase,
   config: fbConfig,
+  config: profileProps,
   dispatch: store.dispatch,
   createFirestoreInstance,
 };

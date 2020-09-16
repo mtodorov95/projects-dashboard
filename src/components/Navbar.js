@@ -11,7 +11,11 @@ function Navbar(props) {
         <Link to="/" className="brand-logo left">
           Plan
         </Link>
-        {props.auth.uid ? <SignedInLinks /> : <SignedOutLinks />}
+        {props.auth.uid ? (
+          <SignedInLinks profile={props.profile} />
+        ) : (
+          <SignedOutLinks />
+        )}
       </div>
     </nav>
   );
@@ -20,6 +24,7 @@ function Navbar(props) {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
+    profile: state.firebase.profile,
   };
 };
 

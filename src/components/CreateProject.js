@@ -10,6 +10,9 @@ function CreateProject(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.createProject({ title, content });
+    setTitle("");
+    setContent("");
+    props.history.push("/");
   };
 
   if (!props.auth.uid) return <Redirect to="/signin" />;
