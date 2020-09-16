@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { signIn } from "../actions/authActions";
 
-function SignIn() {
+function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.prevent.default();
+    e.preventDefault();
+    props.signIn({ email, password });
   };
 
   return (
@@ -32,10 +35,25 @@ function SignIn() {
         </div>
         <div className="input-field">
           <button className="btn pink lighten-1 z-depth-0">Log In</button>
+          <div className="red-text center">
+            {props.authError && <p>{props.authError}</p>}
+          </div>
         </div>
       </form>
     </div>
   );
 }
 
-export default SignIn;
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
