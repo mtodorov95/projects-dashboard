@@ -15,7 +15,7 @@ function Dashboard(props) {
           <ProjectList projects={props.projects} />
         </div>
         <div className="col s12 m5 offset-m1">
-          <Notifications />
+          <Notifications notifications={props.notifications} />
         </div>
       </div>
     </div>
@@ -26,11 +26,15 @@ const mapStateToProps = (state) => {
   return {
     projects: state.firestore.ordered.projects,
     auth: state.firebase.auth,
+    notifications: state.firestore.ordered.notifications,
   };
 };
 
 // Compose to chain multiple higher order components
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "projects" }])
+  firestoreConnect([
+    { collection: "projects" },
+    { collection: "notifications", limit: 3 },
+  ])
 )(Dashboard);
